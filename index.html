@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NPVROAS: The Complete Marketing Analytics Formula Map</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+  :root {
+    --bg-primary: #0a0e1a;
+    --bg-secondary: #111827;
+    --bg-card: #1a2035;
+    --bg-card-hover: #1e2642;
+    --accent-blue: #3b82f6;
+    --accent-cyan: #06b6d4;
+    --accent-purple: #8b5cf6;
+    --accent-amber: #f59e0b;
+    --accent-emerald: #10b981;
+    --accent-rose: #f43f5e;
+    --accent-orange: #f97316;
+    --text-primary: #f1f5f9;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+    --border: #1e293b;
+    --glow-blue: rgba(59, 130, 246, 0.15);
+    --glow-purple: rgba(139, 92, 246, 0.15);
+    --glow-emerald: rgba(16, 185, 129, 0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+
+  /* Animated background grid */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background:
+      radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.05) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.05) 0%, transparent 50%),
+      radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.03) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 40px 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* HERO */
+  .hero {
+    text-align: center;
+    margin-bottom: 60px;
+    padding: 60px 20px;
+    position: relative;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    padding: 6px 16px;
+    border-radius: 20px;
+    background: rgba(59, 130, 246, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    color: var(--accent-blue);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, #f1f5f9 0%, #3b82f6 50%, #8b5cf6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero .subtitle {
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    max-width: 700px;
+    margin: 0 auto 30px;
+    font-weight: 300;
+  }
+
+  .hero .thesis {
+    font-size: 1.1rem;
+    color: var(--accent-amber);
+    font-style: italic;
+    font-weight: 500;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 20px 30px;
+    border-left: 3px solid var(--accent-amber);
+    background: rgba(245, 158, 11, 0.05);
+    border-radius: 0 8px 8px 0;
+    text-align: left;
+  }
+
+  /* EVOLUTION TIMELINE */
+  .evolution {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-bottom: 70px;
+    position: relative;
+  }
+
+  .evolution::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent-rose), var(--accent-amber), var(--accent-emerald));
+    z-index: 0;
+    opacity: 0.3;
+  }
+
+  .evo-card {
+    background: var(--bg-card);
+    border-radius: 16px;
+    padding: 32px 24px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    border: 1px solid var(--border);
+    transition: all 0.3s ease;
+  }
+
+  .evo-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent-blue);
+    box-shadow: 0 8px 30px rgba(59, 130, 246, 0.1);
+  }
+
+  .evo-card.outdated { opacity: 0.6; }
+  .evo-card.outdated:hover { opacity: 0.85; }
+  .evo-card.current { border-color: var(--accent-emerald); box-shadow: 0 0 30px var(--glow-emerald); opacity: 1; }
+
+  .evo-level {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .evo-card:nth-child(1) .evo-level { color: var(--accent-rose); }
+  .evo-card:nth-child(2) .evo-level { color: var(--accent-amber); }
+  .evo-card:nth-child(3) .evo-level { color: var(--accent-emerald); }
+
+  .evo-name {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 8px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .evo-formula {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    color: var(--text-secondary);
+    padding: 12px;
+    background: rgba(0,0,0,0.3);
+    border-radius: 8px;
+    margin: 12px 0;
+  }
+
+  .evo-misses {
+    font-size: 13px;
+    color: var(--accent-rose);
+    margin-top: 10px;
+  }
+
+  .evo-card.current .evo-misses {
+    color: var(--accent-emerald);
+  }
+
+  /* SECTION HEADERS */
+  .section-header {
+    text-align: center;
+    margin: 70px 0 40px;
+  }
+
+  .section-header h2 {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 8px;
+  }
+
+  .section-header .section-num {
+    display: inline-block;
+    width: 36px;
+    height: 36px;
+    line-height: 36px;
+    border-radius: 50%;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+
+  .section-header p {
+    color: var(--text-secondary);
+    font-size: 1.05rem;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  /* FORMULA CARDS */
+  .formula-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: 24px;
+    margin-bottom: 40px;
+  }
+
+  .formula-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .formula-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 3px;
+  }
+
+  .formula-card:hover {
+    border-color: rgba(255,255,255,0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+  }
+
+  .formula-card.blue::before { background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan)); }
+  .formula-card.purple::before { background: linear-gradient(90deg, var(--accent-purple), var(--accent-blue)); }
+  .formula-card.emerald::before { background: linear-gradient(90deg, var(--accent-emerald), var(--accent-cyan)); }
+  .formula-card.amber::before { background: linear-gradient(90deg, var(--accent-amber), var(--accent-orange)); }
+  .formula-card.rose::before { background: linear-gradient(90deg, var(--accent-rose), var(--accent-purple)); }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .card-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  .blue .card-icon { background: rgba(59, 130, 246, 0.15); }
+  .purple .card-icon { background: rgba(139, 92, 246, 0.15); }
+  .emerald .card-icon { background: rgba(16, 185, 129, 0.15); }
+  .amber .card-icon { background: rgba(245, 158, 11, 0.15); }
+  .rose .card-icon { background: rgba(244, 63, 94, 0.15); }
+
+  .card-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+
+  .card-subtitle {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+
+  .formula-block {
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin: 16px 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--accent-cyan);
+    overflow-x: auto;
+  }
+
+  .formula-block .comment {
+    color: var(--text-muted);
+    font-size: 12px;
+  }
+
+  .var-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 14px;
+  }
+
+  .var-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .var-tag .var-name {
+    color: var(--accent-amber);
+    font-weight: 600;
+  }
+
+  .var-tag .var-desc {
+    color: var(--text-muted);
+    font-family: 'Inter', sans-serif;
+  }
+
+  .why-box {
+    margin-top: 14px;
+    padding: 12px 16px;
+    background: rgba(139, 92, 246, 0.06);
+    border-left: 3px solid var(--accent-purple);
+    border-radius: 0 8px 8px 0;
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  .why-box strong {
+    color: var(--accent-purple);
+  }
+
+  /* PIPELINE FLOW */
+  .pipeline {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    margin: 50px 0;
+    flex-wrap: wrap;
+  }
+
+  .pipe-step {
+    padding: 14px 24px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    white-space: nowrap;
+    position: relative;
+  }
+
+  .pipe-arrow {
+    font-size: 20px;
+    color: var(--text-muted);
+    padding: 0 8px;
+  }
+
+  .pipe-step:nth-child(1) { color: var(--accent-blue); }
+  .pipe-step:nth-child(3) { color: var(--accent-cyan); }
+  .pipe-step:nth-child(5) { color: var(--accent-purple); }
+  .pipe-step:nth-child(7) { color: var(--accent-amber); }
+  .pipe-step:nth-child(9) { color: var(--accent-emerald); }
+  .pipe-step:nth-child(11) { color: var(--accent-rose); }
+
+  /* BIG FORMULA */
+  .big-formula {
+    background: linear-gradient(135deg, var(--bg-card) 0%, rgba(139, 92, 246, 0.08) 100%);
+    border: 1px solid rgba(139, 92, 246, 0.2);
+    border-radius: 20px;
+    padding: 40px;
+    margin: 50px 0;
+    text-align: center;
+  }
+
+  .big-formula h3 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: var(--accent-emerald);
+  }
+
+  .big-formula .formula-display {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: clamp(14px, 2vw, 20px);
+    color: var(--accent-cyan);
+    line-height: 2;
+    padding: 30px;
+    background: rgba(0,0,0,0.4);
+    border-radius: 12px;
+    overflow-x: auto;
+  }
+
+  .big-formula .explanation {
+    margin-top: 24px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+    text-align: left;
+  }
+
+  .big-formula .exp-item {
+    padding: 12px 16px;
+    background: rgba(0,0,0,0.2);
+    border-radius: 8px;
+    border-left: 3px solid;
+  }
+
+  .big-formula .exp-item .exp-var {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 15px;
+    margin-bottom: 4px;
+  }
+
+  .big-formula .exp-item .exp-desc {
+    font-size: 13px;
+    color: var(--text-secondary);
+  }
+
+  /* INSIGHT CALLOUT */
+  .insight-box {
+    background: linear-gradient(135deg, rgba(244, 63, 94, 0.08), rgba(245, 158, 11, 0.08));
+    border: 1px solid rgba(244, 63, 94, 0.2);
+    border-radius: 16px;
+    padding: 32px;
+    margin: 40px 0;
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+
+  .insight-icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+  }
+
+  .insight-box h4 {
+    color: var(--accent-rose);
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+  }
+
+  .insight-box p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+  }
+
+  /* FOOTER */
+  .footer {
+    text-align: center;
+    padding: 60px 20px;
+    border-top: 1px solid var(--border);
+    margin-top: 60px;
+  }
+
+  .footer .author {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .footer .tagline {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+  }
+
+  /* FULL WIDTH CARD */
+  .formula-grid.full .formula-card {
+    grid-column: 1 / -1;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .evolution { grid-template-columns: 1fr; gap: 16px; }
+    .evolution::after { display: none; }
+    .formula-grid { grid-template-columns: 1fr; }
+    .pipeline { flex-direction: column; }
+    .pipe-arrow { transform: rotate(90deg); }
+    .big-formula { padding: 24px; }
+    .big-formula .formula-display { font-size: 12px; padding: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-badge">Marketing Science + Capital Allocation</div>
+    <h1>NPVROAS</h1>
+    <p class="subtitle">The Complete Formula Map: From Raw Spend to Capital Allocation Decisions</p>
+    <div class="thesis">
+      "A junior marketer worries about ROAS. A better marketer worries about ROI. A serious capital allocator thinks in NPV. NPVROAS bridges the gap."
+    </div>
+  </div>
+
+  <!-- EVOLUTION: ROAS → ROI → NPVROAS -->
+  <div class="section-header">
+    <div class="section-num" style="background: rgba(244, 63, 94, 0.15); color: var(--accent-rose);">0</div>
+    <h2>The Evolution</h2>
+    <p>Why existing metrics fail at capital allocation</p>
+  </div>
+
+  <div class="evolution">
+    <div class="evo-card outdated">
+      <div class="evo-level">Junior Marketer</div>
+      <div class="evo-name" style="color: var(--accent-rose);">ROAS</div>
+      <div class="evo-formula">Revenue / Ad Spend</div>
+      <div class="evo-misses">Misses: time value, churn, margins, LTV</div>
+    </div>
+    <div class="evo-card outdated">
+      <div class="evo-level">Better Marketer</div>
+      <div class="evo-name" style="color: var(--accent-amber);">ROI</div>
+      <div class="evo-formula">(Revenue - Cost) / Cost</div>
+      <div class="evo-misses">Misses: discounting, expansion, saturation</div>
+    </div>
+    <div class="evo-card current">
+      <div class="evo-level">Capital Allocator</div>
+      <div class="evo-name" style="color: var(--accent-emerald);">NPVROAS</div>
+      <div class="evo-formula">NPV(Cashflows) / Investment</div>
+      <div class="evo-misses">Captures: TVM, churn, expansion, saturation, margins</div>
+    </div>
+  </div>
+
+  <!-- DATA PIPELINE -->
+  <div class="pipeline">
+    <div class="pipe-step">Raw Spend</div>
+    <span class="pipe-arrow">&#x2192;</span>
+    <div class="pipe-step">Adstock</div>
+    <span class="pipe-arrow">&#x2192;</span>
+    <div class="pipe-step">Response Curve</div>
+    <span class="pipe-arrow">&#x2192;</span>
+    <div class="pipe-step">Customers</div>
+    <span class="pipe-arrow">&#x2192;</span>
+    <div class="pipe-step">36-Mo Cashflows</div>
+    <span class="pipe-arrow">&#x2192;</span>
+    <div class="pipe-step">NPV</div>
+    <span class="pipe-arrow">&#x2192;</span>
+    <div class="pipe-step">Capital Decision</div>
+  </div>
+
+  <!-- SECTION 1: SPEND & ADSTOCK -->
+  <div class="section-header">
+    <div class="section-num" style="background: rgba(59, 130, 246, 0.15); color: var(--accent-blue);">1</div>
+    <h2>Spend & Adstock Modeling</h2>
+    <p>Marketing impressions don't vanish instantly. Adstock captures memory decay.</p>
+  </div>
+
+  <div class="formula-grid">
+    <div class="formula-card blue">
+      <div class="card-header">
+        <div class="card-icon">$</div>
+        <div>
+          <div class="card-title">Monthly Spend with Seasonality</div>
+          <div class="card-subtitle">Budget allocation over time</div>
+        </div>
+      </div>
+      <div class="formula-block">
+        S(c,t) = Base_Spend(c) &times; Seasonality(t)
+        <br><br>
+        <span class="comment">// Seasonality multipliers by month:</span>
+        <br>
+        <span class="comment">// Jan=0.8, Feb=0.85, Mar=0.95, Apr=1.0,</span>
+        <br>
+        <span class="comment">// May=1.05, Jun=0.9, Jul=0.7, Aug=0.6,</span>
+        <br>
+        <span class="comment">// Sep=1.1, Oct=1.2, Nov=1.5, Dec=1.8</span>
+      </div>
+      <div class="var-list">
+        <div class="var-tag"><span class="var-name">S(c,t)</span> <span class="var-desc">spend for channel c, month t</span></div>
+        <div class="var-tag"><span class="var-name">Base_Spend</span> <span class="var-desc">annual budget / 12</span></div>
+        <div class="var-tag"><span class="var-name">Seasonality</span> <span class="var-desc">monthly multiplier</span></div>
+      </div>
+    </div>
+
+    <div class="formula-card blue">
+      <div class="card-header">
+        <div class="card-icon">&#x223F;</div>
+        <div>
+          <div class="card-title">Adstock (Exponential Decay)</div>
+          <div class="card-subtitle">Carryover effect of past spend</div>
+        </div>
+      </div>
+      <div class="formula-block">
+        A(t) = S(t) + &theta; &times; A(t-1)
+        <br><br>
+        <span class="comment">// Recursive: today's effective spend =</span>
+        <br>
+        <span class="comment">// today's actual spend + decayed yesterday</span>
+      </div>
+      <div class="var-list">
+        <div class="var-tag"><span class="var-name">&theta;</span> <span class="var-desc">decay rate (0 = no memory, 1 = perfect memory)</span></div>
+        <div class="var-tag"><span class="var-name">A(t)</span> <span class="var-desc">adstocked spend at time t</span></div>
+      </div>
+      <div class="why-box">
+        <strong>Why it matters:</strong> TV and content have high &theta; (0.50-0.60) because brand impressions linger for weeks. Paid Search has low &theta; (0.20) because intent-based clicks have immediate, short-lived effects. Ignoring adstock misattributes long-memory channels' contributions.
+      </div>
+    </div>
+  </div>
+
+  <!-- Channel Theta Table -->
+  <div class="formula-grid full">
+    <div class="formula-card purple">
+      <div class="card-header">
+        <div class="card-icon">&#x03B8;</div>
+        <div>
+          <div class="card-title">Channel-Specific Decay Parameters</div>
+          <div class="card-subtitle">Calibrated adstock rates by channel type</div>
+        </div>
+      </div>
+      <div class="formula-block">
+        Paid_Search:  &theta; = 0.20  <span class="comment">// intent dies fast</span>
+        <br>Display:      &theta; = 0.30  <span class="comment">// moderate awareness</span>
+        <br>LinkedIn_Ads: &theta; = 0.45  <span class="comment">// B2B consideration cycle</span>
+        <br>Organic:      &theta; = 0.50  <span class="comment">// SEO compounds</span>
+        <br>Account_Based:&theta; = 0.55  <span class="comment">// long enterprise sales</span>
+        <br>Content:      &theta; = 0.60  <span class="comment">// evergreen assets persist</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: RESPONSE CURVES -->
+  <div class="section-header">
+    <div class="section-num" style="background: rgba(139, 92, 246, 0.15); color: var(--accent-purple);">2</div>
+    <h2>Response Curves (Saturation)</h2>
+    <p>More spend doesn't mean proportionally more customers. Diminishing returns are the law.</p>
+  </div>
+
+  <div class="formula-grid">
+    <div class="formula-card purple">
+      <div class="card-header">
+        <div class="card-icon">log</div>
+        <div>
+          <div class="card-title">Log Response Curve</div>
+          <div class="card-subtitle">Most channels — concave saturation</div>
+        </div>
+      </div>
+      <div class="formula-block">
+        R(x) = &beta; &times; log(1 + k &times; x)
+        <br><br>
+        <span class="comment">// Used for: Paid_Search, Paid_Social,</span>
+        <br>
+        <span class="comment">// Display, LinkedIn, Content, Organic</span>
+      </div>
+      <div class="var-list">
+        <div class="var-tag"><span class="var-name">&beta;</span> <span class="var-desc">scale (max response)</span></div>
+        <div class="var-tag"><span class="var-name">k</span> <span class="var-desc">sensitivity (how fast it saturates)</span></div>
+        <div class="var-tag"><span class="var-name">x</span> <span class="var-desc">adstocked spend</span></div>
+      </div>
+      <div class="why-box">
+        <strong>Why log:</strong> Simple, interpretable, and captures the core economics — doubling spend does NOT double output. The marginal customer always costs more than the average customer. This is why average ROAS misleads.
+      </div>
+    </div>
+
+    <div class="formula-card purple">
+      <div class="card-header">
+        <div class="card-icon">&#x21D1;</div>
+        <div>
+          <div class="card-title">Hill Response Curve</div>
+          <div class="card-subtitle">Account-Based Marketing — S-curve with threshold</div>
+        </div>
+      </div>
+      <div class="formula-block">
+        R(x) = &beta; &times; x<sup>&alpha;</sup> / (x<sup>&alpha;</sup> + &lambda;)
+        <br><br>
+        <span class="comment">// S-shaped: no effect below threshold,</span>
+        <br>
+        <span class="comment">// then steep gains, then saturation</span>
+      </div>
+      <div class="var-list">
+        <div class="var-tag"><span class="var-name">&alpha;</span> <span class="var-desc">steepness of S-curve</span></div>
+        <div class="var-tag"><span class="var-name">&lambda;</span> <span class="var-desc">half-max spend (inflection point)</span></div>
+        <div class="var-tag"><span class="var-name">&beta;</span> <span class="var-desc">max response ceiling</span></div>
+      </div>
+      <div class="why-box">
+        <strong>Why Hill for ABM:</strong> Enterprise ABM requires minimum investment (dedicated reps, custom content, event sponsorship) before seeing any pipeline. Below-threshold spend is wasted. The Hill function captures this activation energy requirement that log curves miss.
+      </div>
+    </div>
+  </div>
+
+  <!-- INSIGHT: Average ≠ Marginal -->
+  <div class="insight-box">
+    <div class="insight-icon">&#x26A0;</div>
+    <div>
+      <h4>The Core Insight: Average Returns &#x2260; Marginal Returns</h4>
+      <p>Account-Based Marketing shows 10.3x average LTV:CAC — the best of any channel. But its marginal NPV from +$50K additional spend is near zero because the response curve is saturated. LinkedIn at 8.0x average LTV:CAC delivers +$2.19M in marginal NPV per +$50K because it's still on the steep part of its curve. <strong>A CFO who allocates based on averages destroys value. A capital allocator who allocates based on marginals creates it.</strong></p>
+    </div>
+  </div>
+
+  <!-- SECTION 3: CUSTOMER ACQUISITION -->
+  <div class="section-header">
+    <div class="section-num" style="background: rgba(6, 182, 212, 0.15); color: var(--accent-cyan);">3</div>
+    <h2>Customer Acquisition</h2>
+    <p>Converting response curve output into actual customer arrivals</p>
+  </div>
+
+  <div class="formula-grid">
+    <div class="formula-card emerald">
+      <div class="card-header">
+        <div class="card-icon">&#x1F465;</div>
+        <div>
+          <div class="card-title">Expected Customers per Channel</div>
+          <div class="card-subtitle">Response to customer conversion</div>
+        </div>
+      </div>
+      <div class="formula-block">
+        E[Customers(c,t)] = R(Adstock(c,t))
+        <br><br>
+        Actual ~ Poisson(&lambda; = E[Customers])
+        <br><br>
+        <span class="comment">// Stochastic: real acquisition is noisy</span>
+        <br>
+        <span class="comment">// Poisson adds realistic variance</span>
+      </div>
+      <div class="var-list">
+        <div class="var-tag"><span class="var-name">R()</span> <span class="var-desc">response curve output</span></div>
+        <div class="var-tag"><span class="var-name">Poisson</span> <span class="var-desc">discrete random arrivals</span></div>
+      </div>
+    </div>
+
+    <div class="formula-card emerald">
+      <div class="card-header">
+        <div class="card-icon">&#x1F3AF;</div>
+        <div>
+          <div class="card-title">Persona Assignment</div>
+          <div class="card-subtitle">Channel-persona affinity matrix</div>
+        </div>
+      </div>
+      <div class="formula-block">
+        P(persona | channel) = Affinity_Matrix[c, p]
+        <br><br>
+        <span class="comment">// Enterprise: ABM=50%, LinkedIn=20%</span>
+        <br>
+        <span class="comment">// Mid-Market: Search=35%, Social=25%</span>
+        <br>
+        <span class="comment">// SMB: Search=30%, Social=30%</span>
+        <br>
+        <span class="comment">// Startup: Organic=35%, Content=30%</span>
+      </div>
+      <div class="var-list">
+        <div class="var-tag"><span class="var-name">ACV</span> <span class="var-desc">$150K, $50K, $15K, $8K by persona</span></div>
+        <div class="var-tag"><span class="var-name">Retention</span> <span class="var-desc">0.99, 0.97, 0.95, 0.90 monthly</span></div>
+        <div class="var-tag"><span class="var-name">Expansion</span> <span class="var-desc">25%, 15%, 5%, 0% annual</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4: CUSTOMER LIFETIME VALUE -->
+  <div class="section-header">
+    <div class="section-num" style="background: rgba(245, 158, 11, 0.15); color: var(--accent-amber);">4</div>
+    <h2>Customer Lifetime Value (NPV)</h2>
+    <p>The heart of NPVROAS: discounted, risk-adjusted cashflows over the customer lifetime</p>
+  </div>
+
+  <!-- THE BIG FORMULA -->
+  <div class="big-formula">
+    <h3>The NPVROAS Master Formula</h3>
+    <div class="formula-display">
+      NPV<sub>customer</sub> = &Sigma;<sub>t=0</sub><sup>35</sup>
+      &nbsp;[&nbsp;(ACV/12) &times; (1 + g)<sup>t/12</sup> &times; GM &times; Alive(t)&nbsp;]
+      &nbsp;/&nbsp;(1 + r)<sup>t</sup>
+    </div>
+    <div class="explanation">
+      <div class="exp-item" style="border-left-color: var(--accent-blue);">
+        <div class="exp-var" style="color: var(--accent-blue);">ACV / 12</div>
+        <div class="exp-desc">Annual contract value, monthly</div>
+      </div>
+      <div class="exp-item" style="border-left-color: var(--accent-emerald);">
+        <div class="exp-var" style="color: var(--accent-emerald);">(1 + g)<sup>t/12</sup></div>
+        <div class="exp-desc">Expansion revenue growth</div>
+      </div>
+      <div class="exp-item" style="border-left-color: var(--accent-amber);">
+        <div class="exp-var" style="color: var(--accent-amber);">GM</div>
+        <div class="exp-desc">Gross margin (80% SaaS)</div>
+      </div>
+      <div class="exp-item" style="border-left-color: var(--accent-rose);">
+        <div class="exp-var" style="color: var(--accent-rose);">Alive(t)</div>
+        <div class="exp-desc">Survival: retention<sup>t</sup> (stochastic)</div>
+      </div>
+      <div class="exp-item" style="border-left-color: var(--accent-purple);">
+        <div class="exp-var" style="color: var(--accent-purple);">(1 + r)<sup>t</sup></div>
+        <div class="exp-desc">Discount factor at 10% annual</div>
+      </div>
+      <div class="exp-item" style="border-left-color: var(--accent-cyan);">
+        <div class="exp-var" style="color: var(--accent-cyan);">t = 0..35</div>
+        <div class="exp-desc">36-month cashflow horizon</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="formula-grid">
+    <div class="formula-card amber">
+      <div class="card-header">
+        <div class="card-icon">&#x1F4B0;</div>
+        <div>
+          <div class="card-title">Monthly Revenue per Customer</div>
+          <div class="card-subtitle">Base + expansion, pre-churn</div>
+        </div>
+      </div>
+      <div class="formula-block">
+        Rev(t) = (ACV / 12) &times; (1 + g)<sup>t/12</sup>
+        <br><br>
+        <span class="comment">// t = months since conversion</span>
+        <br>
+        <span class="comment">// g = annual expansion rate</span>
+        <br>
+        <span class="comment">// Enterprise: $12,500/mo growing 25%/yr</span>
+        <br>
+        <span class="comment">// Startup: $667/mo, no expansion</span>
+      </div>
+      <div class="var-list">
+        <div class="var-tag"><span class="var-name">ACV</span> <span class="var-desc">annual contract value</span></div>
+        <div class="var-tag"><span class="var-name">g</span> <span class="var-desc">expansion rate (0-25%)</span></div>
+      </div>
+    </div>
+
+    <div class="formula-card amber">
+      <div class="card-header">
+        <div class="card-icon">&#x2620;</div>
+        <div>
+          <div class="card-title">Churn / Survival Function</div>
+          <div class="card-subtitle">Stochastic customer lifetime</div>
+        </div>
+      </div>
+      <div class="formula-block">
+        P(alive at t) = &Pi;<sub>i=0</sub><sup>t</sup> Bernoulli(retention)
+        <br><br>
+        E[alive at t] = retention<sup>t</sup>
+        <br><br>
+        <span class="comment">// Enterprise 0.99^36 = 69.7% survive 3yr</span>
+        <br>
+        <span class="comment">// Startup 0.90^36 = 2.2% survive 3yr</span>
+      </div>
+      <div class="why-box">
+        <strong>Why stochastic, not deterministic:</strong> Using expected values (retention<sup>t</sup>) gives you the mean. But capital allocation requires understanding the variance. Monte Carlo simulation of individual churn events reveals the risk profile of each channel's customer base. Enterprise is a bond; Startup is an option.
+      </div>
+    </div>
+
+    <div class="formula-card amber">
+      <div class="card-header">
+        <div class="card-icon">%</div>
+        <div>
+          <div class="card-title">Discount Rate</div>
+          <div class="card-subtitle">Time value of money conversion</div>
+        </div>
+      </div>
+      <div class="formula-block">
+        r_monthly = (1 + r_annual)<sup>1/12</sup> - 1
+        <br><br>
+        <span class="comment">// r_annual = 10% (hurdle rate / WACC)</span>
+        <br>
+        <span class="comment">// r_monthly = 0.797%</span>
+        <br><br>
+        DF(t) = 1 / (1 + r_monthly)<sup>t</sup>
+        <br>
+        <span class="comment">// Month 36 discount factor = 0.749</span>
+      </div>
+      <div class="why-box">
+        <strong>Why this matters:</strong> A dollar of revenue in month 36 is worth $0.75 today. ROAS treats $1 today and $1 in 3 years as equal. That's a 25% error on a single cashflow, compounded across thousands of customers. This is why ROAS systematically overvalues channels that acquire low-retention, slow-paying customers.
+      </div>
+    </div>
+
+    <div class="formula-card amber">
+      <div class="card-header">
+        <div class="card-icon">&#x23F1;</div>
+        <div>
+          <div class="card-title">Sales Cycle Delay</div>
+          <div class="card-subtitle">Time from acquisition to first revenue</div>
+        </div>
+      </div>
+      <div class="formula-block">
+        Revenue starts at: t = ceil(sales_cycle_days / 30)
+        <br><br>
+        <span class="comment">// Enterprise: 90-120 days (3-4 months)</span>
+        <br>
+        <span class="comment">// Mid-Market: 45-60 days</span>
+        <br>
+        <span class="comment">// SMB: 14-30 days</span>
+        <br>
+        <span class="comment">// Startup: 3-7 days</span>
+      </div>
+      <div class="var-list">
+        <div class="var-tag"><span class="var-name">sales_cycle</span> <span class="var-desc">persona-specific conversion lag</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 5: COST METRICS -->
+  <div class="section-header">
+    <div class="section-num" style="background: rgba(244, 63, 94, 0.15); color: var(--accent-rose);">5</div>
+    <h2>Cost & Efficiency Metrics</h2>
+    <p>What you actually paid vs. what you actually got</p>
+  </div>
+
+  <div class="formula-grid">
+    <div class="formula-card rose">
+      <div class="card-header">
+        <div class="card-icon">&#x1F4CA;</div>
+        <div>
+          <div class="card-title">Customer Acquisition Cost (CAC)</div>
+          <div class="card-subtitle">True fully-loaded cost per customer</div>
+        </div>
+      </div>
+      <div class="formula-block">
+        CAC(c) = Total_Spend(c) / Customers(c)
+        <br><br>
+        Fully_Loaded_CAC = CAC &times; Sales_Multiplier
+        <br><br>
+        <span class="comment">// Sales multiplier by persona:</span>
+        <br>
+        <span class="comment">// Enterprise=1.5x, Mid-Market=1.3x</span>
+        <br>
+        <span class="comment">// SMB=1.1x, Startup=1.05x</span>
+      </div>
+      <div class="why-box">
+        <strong>Sales multiplier:</strong> Marketing spend alone underestimates true CAC. Enterprise deals require AEs, SEs, POC environments, legal review. The multiplier captures these costs. Without it, Enterprise channels look artificially efficient.
+      </div>
+    </div>
+
+    <div class="formula-card rose">
+      <div class="card-header">
+        <div class="card-icon">&#x2696;</div>
+        <div>
+          <div class="card-title">LTV:CAC Ratio</div>
+          <div class="card-subtitle">The classic — but incomplete — efficiency metric</div>
+        </div>
+      </div>
+      <div class="formula-block">
+        LTV:CAC = NPV(Customer Cashflows) / CAC
+        <br><br>
+        <span class="comment">// > 3.0x = healthy</span>
+        <br>
+        <span class="comment">// > 5.0x = excellent or under-investing</span>
+        <br>
+        <span class="comment">// < 1.0x = destroying value</span>
+      </div>
+      <div class="why-box">
+        <strong>The trap:</strong> LTV:CAC is an <em>average</em> metric. A channel at 10x LTV:CAC might be saturated (no room to grow) while a channel at 4x might have massive marginal upside. LTV:CAC tells you where you've been. Marginal NPV tells you where to go.
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 6: MARGINAL ANALYSIS -->
+  <div class="section-header">
+    <div class="section-num" style="background: rgba(16, 185, 129, 0.15); color: var(--accent-emerald);">6</div>
+    <h2>Marginal NPV & Capital Allocation</h2>
+    <p>The decision that matters: where does the NEXT dollar go?</p>
+  </div>
+
+  <div class="formula-grid">
+    <div class="formula-card emerald">
+      <div class="card-header">
+        <div class="card-icon">&#x0394;</div>
+        <div>
+          <div class="card-title">Marginal NPV per Channel</div>
+          <div class="card-subtitle">Monte Carlo incremental testing</div>
+        </div>
+      </div>
+      <div class="formula-block">
+        &Delta;NPV(c) = E[NPV(budget + &delta;)] - E[NPV(budget)]
+        <br><br>
+        <span class="comment">// Method: Monte Carlo (N simulations)</span>
+        <br>
+        <span class="comment">// 1. Run full pipeline at baseline budget</span>
+        <br>
+        <span class="comment">// 2. Add +$50K to channel c</span>
+        <br>
+        <span class="comment">// 3. Re-run full pipeline</span>
+        <br>
+        <span class="comment">// 4. Difference = marginal NPV</span>
+        <br>
+        <span class="comment">// 5. Average across N simulations</span>
+      </div>
+      <div class="var-list">
+        <div class="var-tag"><span class="var-name">&delta;</span> <span class="var-desc">marginal spend increment ($50K)</span></div>
+        <div class="var-tag"><span class="var-name">N</span> <span class="var-desc">simulation count (3-25)</span></div>
+      </div>
+      <div class="why-box">
+        <strong>Why Monte Carlo:</strong> The response curve is nonlinear. The customer mix is stochastic. The churn paths are random. A closed-form marginal calculation would require assumptions we don't want to make. Simulation lets the model speak for itself.
+      </div>
+    </div>
+
+    <div class="formula-card emerald">
+      <div class="card-header">
+        <div class="card-icon">&#x21C4;</div>
+        <div>
+          <div class="card-title">Budget Reallocation</div>
+          <div class="card-subtitle">Moving capital from saturated to hungry channels</div>
+        </div>
+      </div>
+      <div class="formula-block">
+        New_Budget(c) = Old_Budget(c) + Reallocation(c)
+        <br><br>
+        <span class="comment">// Example scenario:</span>
+        <br>
+        <span class="comment">// Display: -60% ($180K freed)</span>
+        <br>
+        <span class="comment">// Account_Based: +70% of freed ($126K)</span>
+        <br>
+        <span class="comment">// LinkedIn_Ads: +30% of freed ($54K)</span>
+        <br><br>
+        &Delta;Portfolio_NPV = NPV(new) - NPV(old)
+        <br>
+        <span class="comment">// Result: +$984K incremental NPV</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 7: A/B TESTING & BAYESIAN -->
+  <div class="section-header">
+    <div class="section-num" style="background: rgba(139, 92, 246, 0.15); color: var(--accent-purple);">7</div>
+    <h2>A/B Testing & Bayesian Updating</h2>
+    <p>Continuous learning: updating beliefs about channel performance with new data</p>
+  </div>
+
+  <div class="formula-grid">
+    <div class="formula-card purple">
+      <div class="card-header">
+        <div class="card-icon">A|B</div>
+        <div>
+          <div class="card-title">Frequentist A/B Test</div>
+          <div class="card-subtitle">Standard significance testing</div>
+        </div>
+      </div>
+      <div class="formula-block">
+        z = (&mu;<sub>B</sub> - &mu;<sub>A</sub>) / &radic;(s<sub>A</sub>&sup2;/n<sub>A</sub> + s<sub>B</sub>&sup2;/n<sub>B</sub>)
+        <br><br>
+        <span class="comment">// H0: no difference between variants</span>
+        <br>
+        <span class="comment">// Reject if |z| > 1.96 (p < 0.05)</span>
+        <br><br>
+        MDE = z<sub>&alpha;</sub> &times; &radic;(2&sigma;&sup2;/n)
+        <br>
+        <span class="comment">// Minimum Detectable Effect at power 0.80</span>
+      </div>
+      <div class="var-list">
+        <div class="var-tag"><span class="var-name">z</span> <span class="var-desc">test statistic</span></div>
+        <div class="var-tag"><span class="var-name">MDE</span> <span class="var-desc">smallest effect you can detect</span></div>
+        <div class="var-tag"><span class="var-name">n</span> <span class="var-desc">sample size per variant</span></div>
+      </div>
+    </div>
+
+    <div class="formula-card purple">
+      <div class="card-header">
+        <div class="card-icon">&#x1D4AB;</div>
+        <div>
+          <div class="card-title">Bayesian Posterior Update</div>
+          <div class="card-subtitle">Updating channel beliefs with new evidence</div>
+        </div>
+      </div>
+      <div class="formula-block">
+        P(&theta;|data) &prop; P(data|&theta;) &times; P(&theta;)
+        <br><br>
+        <span class="comment">// Prior: Beta(&alpha;, &beta;) on conversion rate</span>
+        <br>
+        <span class="comment">// Likelihood: Binomial(n, k)</span>
+        <br>
+        <span class="comment">// Posterior: Beta(&alpha;+k, &beta;+n-k)</span>
+        <br><br>
+        P(B > A) = &int; P(&theta;<sub>B</sub> > &theta;<sub>A</sub>) d&theta;
+        <br>
+        <span class="comment">// Probability variant B beats A</span>
+      </div>
+      <div class="why-box">
+        <strong>Why Bayesian for marketing:</strong> Frequentist testing answers "is there a difference?" Bayesian testing answers "how confident am I, and what should I do about it?" In capital allocation, the question is always the latter. A Bayesian framework lets you update channel performance beliefs continuously and make allocation decisions under quantified uncertainty — exactly like a portfolio manager.
+      </div>
+    </div>
+  </div>
+
+  <!-- FINAL: NPVROAS -->
+  <div class="big-formula" style="border-color: rgba(16, 185, 129, 0.3); background: linear-gradient(135deg, var(--bg-card) 0%, rgba(16, 185, 129, 0.08) 100%);">
+    <h3>Putting It All Together: NPVROAS</h3>
+    <div class="formula-display">
+      NPVROAS(c) = &Sigma;<sub>customers from c</sub>
+      &nbsp;[&nbsp;&Sigma;<sub>t=0</sub><sup>35</sup>
+      Rev(t) &times; GM &times; Alive(t) / (1+r)<sup>t</sup>&nbsp;]
+      &nbsp;/&nbsp;Total_Spend(c)
+      <br><br>
+      <span style="color: var(--accent-amber); font-size: 0.85em;">
+        where Rev(t) = f(Adstock(Spend, &theta;), ResponseCurve(&beta;, k))
+      </span>
+    </div>
+    <div style="margin-top: 24px; color: var(--text-secondary); font-size: 0.95rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+      Every variable in this formula is empirically grounded, financially rigorous, and channel-specific. This is not a marketing metric dressed up in finance clothing — it IS corporate finance applied to the marketing budget line.
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="author">Alex Sierra</div>
+    <div class="tagline">Aerospace Engineering &rarr; MBA (Marketing) &rarr; MS Finance</div>
+    <div class="tagline" style="margin-top: 8px; color: var(--accent-blue);">NPVROAS Framework &mdash; 2025</div>
+  </div>
+
+</div>
+
+</body>
+</html>
